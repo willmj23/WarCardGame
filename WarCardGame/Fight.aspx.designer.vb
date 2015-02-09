@@ -11,104 +11,86 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class [Default]
+Partial Public Class Fight
 
     '''<summary>
-    '''btnCreateDeck control.
+    '''ddlRules control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnCreateDeck As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents ddlRules As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''btnShuffle control.
+    '''btnStart control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnShuffle As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnStart As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''btnDeal control.
+    '''btnStartOver control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnDeal As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnStartOver As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''btnFight control.
+    '''pnlResults control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnFight As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents pnlResults As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''pnlDeck control.
+    '''ltlResults control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlDeck As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents ltlResults As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
-    '''trTeam1 control.
+    '''ltlTeam1Score control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents trTeam1 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents ltlTeam1Score As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
-    '''rptTeam1Decka control.
+    '''ltlTeam2Score control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rptTeam1Decka As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents ltlTeam2Score As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
-    '''rptTeam1Deckb control.
+    '''ltlties control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rptTeam1Deckb As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents ltlties As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
-    '''trTeam2 control.
+    '''rptResults control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents trTeam2 As Global.System.Web.UI.HtmlControls.HtmlTableRow
-
-    '''<summary>
-    '''rptTeam2Decka control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptTeam2Decka As Global.System.Web.UI.WebControls.Repeater
-
-    '''<summary>
-    '''rptTeam2Deckb control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptTeam2Deckb As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents rptResults As Global.System.Web.UI.WebControls.Repeater
 End Class

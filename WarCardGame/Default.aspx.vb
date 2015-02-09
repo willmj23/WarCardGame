@@ -3,49 +3,90 @@
 Partial Class [Default]
     Inherits Page
 
-    Protected Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
-        pnlResults.Visible = True
+    Protected Sub btnCreateDeck_Click(sender As Object, e As EventArgs) Handles btnCreateDeck.Click
+        pnlDeck.Visible = True
         Dim myGame As New WarGame()
-        If ddlRules.SelectedValue = "1" Then
-            myGame.StartNewGame(New ClassicRules())
-        ElseIf ddlRules.SelectedValue = "2" Then
-            myGame.StartNewGame(New OppositeRules())
-        End If
-        ltlResults.Text = myGame.Winner.ToString
-        ltlTeam1Score.Text = myGame.Team1Score.ToString
-        ltlTeam2Score.Text = myGame.Team2Score.ToString
-        ltlties.Text = myGame.Ties.ToString
+        myGame.CreateDeck()
 
-        rptResults.DataSource = myGame.Results
-        rptResults.DataBind()
+        Session("CardGame") = myGame
+        trTeam1.Visible = False
+        trTeam2.Visible = False
+
+        rptTeam1Decka.DataSource = myGame.Deck.GetRange(0, 13)
+        rptTeam1Deckb.DataSource = myGame.Deck.GetRange(13, 13)
+        rptTeam2Decka.DataSource = myGame.Deck.GetRange(26, 13)
+        rptTeam2Deckb.DataSource = myGame.Deck.GetRange(39, 13)
+
+        rptTeam1Decka.DataBind()
+        rptTeam1Deckb.DataBind()
+        rptTeam2Decka.DataBind()
+        rptTeam2Deckb.DataBind()
+
+        btnShuffle.Visible = True
+        btnDeal.Visible = True
 
     End Sub
 
-    Protected Sub rptResults_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptResults.ItemDataBound
-        Dim myResult As Battle
-        Dim imgTeam1 As Image
-        Dim imgTeam2 As Image
-        Dim trResult As HtmlTableRow
-        Dim ltlResult As Literal
+    Protected Sub rptTeam1Decka_ItemDataBound(sender As Object, e As RepeaterItemEventArgs) Handles rptTeam1Decka.ItemDataBound, rptTeam1Deckb.ItemDataBound, rptTeam2Decka.ItemDataBound, rptTeam2Deckb.ItemDataBound
+        Dim myCard As Card
+        Dim img1 As Image
+
+
         Try
-            myResult = CType(e.Item.DataItem, Battle)
-            imgTeam1 = CType(e.Item.FindControl("imgTeam1"), Image)
-            imgTeam2 = CType(e.Item.FindControl("imgTeam2"), Image)
-            trResult = CType(e.Item.FindControl("trResult"), HtmlTableRow)
-            ltlResult = CType(e.Item.FindControl("ltlResult"), Literal)
+            myCard = CType(e.Item.DataItem, Card)
+            img1 = CType(e.Item.FindControl("img1"), Image)
 
-            imgTeam1.ImageUrl = "~/Images/" + myResult.Team1Card.ImageName
-            imgTeam2.ImageUrl = "~/Images/" + myResult.Team2Card.ImageName
-            ltlResult.Text = myResult.Result.ToString
-            If myResult.Result = BattleResult.Team1 Then
-                trResult.BgColor = "#FFFF00"
-            ElseIf myResult.Result = BattleResult.Team2 Then
-                trResult.BgColor = "#0033CC"
-            End If
-
-
+            img1.ImageUrl = "~/Images/" + myCard.ImageName
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub btnShuffle_Click(sender As Object, e As EventArgs) Handles btnShuffle.Click
+        Dim myGame As WarGame = CType(Session("CardGame"), WarGame)
+
+        myGame.Shuffle()
+        trTeam1.Visible = False
+        trTeam2.Visible = False
+
+        rptTeam1Decka.DataSource = myGame.Deck.GetRange(0, 13)
+        rptTeam1Deckb.DataSource = myGame.Deck.GetRange(13, 13)
+        rptTeam2Decka.DataSource = myGame.Deck.GetRange(26, 13)
+        rptTeam2Deckb.DataSource = myGame.Deck.GetRange(39, 13)
+
+        rptTeam1Decka.DataBind()
+        rptTeam1Deckb.DataBind()
+        rptTeam2Decka.DataBind()
+        rptTeam2Deckb.DataBind()
+
+        Session("CardGame") = myGame
+
+    End Sub
+
+    Private Sub btnDeal_Click(sender As Object, e As EventArgs) Handles btnDeal.Click
+        Dim myGame As WarGame = CType(Session("CardGame"), WarGame)
+
+        myGame.Deal()
+        trTeam1.Visible = True
+        trTeam2.Visible = True
+
+        rptTeam1Decka.DataSource = myGame.Team1Deck.GetRange(0, 13)
+        rptTeam1Deckb.DataSource = myGame.Team1Deck.GetRange(13, 13)
+        rptTeam2Decka.DataSource = myGame.Team2Deck.GetRange(0, 13)
+        rptTeam2Deckb.DataSource = myGame.Team2Deck.GetRange(13, 13)
+
+        rptTeam1Decka.DataBind()
+        rptTeam1Deckb.DataBind()
+        rptTeam2Decka.DataBind()
+        rptTeam2Deckb.DataBind()
+
+        btnShuffle.Visible = False
+        btnDeal.Visible = False
+        btnFight.Visible = True
+        Session("CardGame") = myGame
+    End Sub
+
+    Private Sub btnFight_Click(sender As Object, e As EventArgs) Handles btnFight.Click
+        Response.Redirect("~/Fight.aspx", False)
     End Sub
 End Class

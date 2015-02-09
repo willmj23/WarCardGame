@@ -13,8 +13,7 @@ Public Class WarGame
 
     End Sub
 
-    Public Sub StartNewGame(myrules As IRules)
-        Rules = myrules
+    Public Sub CreateDeck()
         Dim mySuits As List(Of CardSuit) = Me.GetListSuits
         Dim myCardfaces As List(Of CardNumber) = Me.GetFaceCards()
 
@@ -23,8 +22,14 @@ Public Class WarGame
                 Deck.Add(New Card(mySuit, myCardface))
             Next
         Next
-        Deck = Shuffle(Deck)
-        Deal()
+    End Sub
+    Public Sub StartGame(myrules As IRules)
+        Rules = myrules
+        Me.Team2Score = 0
+        Me.Team1Score = 0
+        Me.Results.Clear()
+        Me.Ties = 0
+
         StartWar()
 
         If Team1Score > Team2Score Then
@@ -63,12 +68,12 @@ Public Class WarGame
         Return myCardfaces
     End Function
 
-    Function Shuffle(Of card)(collection As IEnumerable(Of Card)) As List(Of Card)
+    Public Sub Shuffle()
         Dim r As Random = New Random()
-        Shuffle = collection.OrderBy(Function(a) r.Next()).ToList()
-    End Function
+        Me.Deck = Deck.OrderBy(Function(a) r.Next()).ToList()
+    End Sub
 
-    Private Sub Deal()
+    Public Sub Deal()
         For Each myCard As Card In Deck
             If Team2Deck.Count <> Team1Deck.Count Then
                 Team2Deck.Add(myCard)

@@ -1,54 +1,55 @@
-﻿<%@ Page Title="Home Page" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.vb"  Inherits="WarCardGame.Default" %>
+﻿<%@ Page Title="Home Page" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.vb" Inherits="WarCardGame.Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
-        Rules:
-        <asp:DropDownList ID="ddlRules" runat="server">
-            <asp:ListItem Text="Classic Rules" Value="1"></asp:ListItem>
-                 <asp:ListItem Text="Opposite Rules" Value="2"></asp:ListItem>
-        </asp:DropDownList><br />
-        <asp:Button ID="btnStart" runat="server" Text="Start Game" />
-          
+        <asp:Button ID="btnCreateDeck" runat="server" Text="Create Deck" />
+        <asp:Button ID="btnShuffle" runat="server" Visible="false" Text="Shuffle" />
+<asp:Button ID="btnDeal" runat="server" Visible="false" Text="Deal" />
+        <asp:Button ID="btnFight" runat="server" Visible="false" Text="Begin Game" />
         <hr />
-        <asp:Panel ID="pnlResults" runat="server" Visible="false">
-            <h2>Results: 
-                <asp:Literal ID="ltlResults" runat="server"></asp:Literal></h2>
-            Team1 Score:
-            <asp:Literal ID="ltlTeam1Score" runat="server"></asp:Literal><br />
-            Team2 Score:
-            <asp:Literal ID="ltlTeam2Score" runat="server"></asp:Literal><br />
-            Ties:
-            <asp:Literal ID="ltlties" runat="server"></asp:Literal><br />
+        <asp:Panel ID="pnlDeck" runat="server" Visible="false">
 
-            <h3>Detailed Results</h3>
             <table cellpadding="1" cellspacing="1" border="1">
-                <tr>
-                    <td><strong>Team1 Card</strong> </td>
-                    <td>&nbsp;</td>
-                    <td><strong>Team 2 Card</strong></td>
-                    <td><strong>Result</strong></td>
+                <tr runat="server" id="trTeam1" visible="false">
+                    <td><h1>Team 1 Deck</h1></td>
                 </tr>
-                <asp:Repeater ID="rptResults" runat="server">
-                    <ItemTemplate>
-                        <tr runat="server" id="trResult">
-                            <td align="center">
-                                <asp:Image ID="imgTeam1" runat="server" Width="100px" /></td>
-                            <td align="center">VS</td>
-                            <td align="center">
-                                <asp:Image ID="imgTeam2" runat="server" Width="100px" /></td>
-                            <td>
-                                <asp:Literal ID="ltlResult" runat="server"></asp:Literal></td>
-                        </tr>
-                    </ItemTemplate>
-                </asp:Repeater>
+                <tr>
+                    <td>
+                        <asp:Repeater ID="rptTeam1Decka" runat="server">
+                            <ItemTemplate>
+                                <asp:Image ID="img1" runat="server" Width="70px" />
+                            </ItemTemplate>
+                        </asp:Repeater></td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Repeater ID="rptTeam1Deckb" runat="server">
+                            <ItemTemplate>
+                                <asp:Image ID="img1" runat="server" Width="70px" />
+                            </ItemTemplate>
+                        </asp:Repeater></td>
+                </tr>
+                <tr runat="server" id="trTeam2" visible="false">
+                    <td><h1>Team 2 Deck</h1></td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Repeater ID="rptTeam2Decka" runat="server">
+                            <ItemTemplate>
+                                <asp:Image ID="img1" runat="server" Width="70px" />
+                            </ItemTemplate>
+                        </asp:Repeater></td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Repeater ID="rptTeam2Deckb" runat="server">
+                            <ItemTemplate>
+                                <asp:Image ID="img1" runat="server" Width="70px" />
+                            </ItemTemplate>
+                        </asp:Repeater></td>
+                </tr>
             </table>
-
-
         </asp:Panel>
-
     </div>
-
-
-
 </asp:Content>
